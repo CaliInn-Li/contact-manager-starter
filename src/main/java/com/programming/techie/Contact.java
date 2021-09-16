@@ -1,5 +1,7 @@
 package com.programming.techie;
 
+import org.junit.platform.commons.util.StringUtils;
+
 public class Contact {
     private String firstName;
     private String lastName;
@@ -20,28 +22,28 @@ public class Contact {
     }
 
     public void validateFirstName() {
-        if (this.firstName.isBlank())
+        if (StringUtils.isBlank(this.firstName))
             throw new RuntimeException("First Name Cannot be null or empty");
     }
 
     public void validateLastName() {
-        if (this.lastName.isBlank())
+        if (StringUtils.isBlank(this.lastName))
             throw new RuntimeException("Last Name Cannot be null or empty");
     }
 
     public void validatePhoneNumber() {
-        if (this.phoneNumber.isBlank()) {
+        if (StringUtils.isBlank(this.phoneNumber)) {
             throw new RuntimeException("Phone Name Cannot be null or empty");
         }
 
-        if (this.phoneNumber.length() != 10) {
-            throw new RuntimeException("Phone Number Should be 10 Digits Long");
+        if (this.phoneNumber.length() <= 10) {
+            throw new RuntimeException("Phone Number Should be more than 10 Digits Long");
         }
         if (!this.phoneNumber.matches("\\d+")) {
             throw new RuntimeException("Phone Number Contain only digits");
         }
-        if (!this.phoneNumber.startsWith("0")) {
-            throw new RuntimeException("Phone Number Should Start with 0");
+        if (this.phoneNumber.startsWith("0")) {
+            throw new RuntimeException("Phone Number Should not Start with 0");
         }
     }
 }
